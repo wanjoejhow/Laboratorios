@@ -1,6 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
@@ -26,7 +28,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameManager.instacia.RestaurarPuntaje();
         //Carga la primera vez que usa el objeto y se reutiliza
         rigidBody = this.GetComponent<Rigidbody>();
     
@@ -116,7 +118,9 @@ public class Player : MonoBehaviour
     public void FinDeJuego()
     {
         Debug.Log("Juego Finalizado");
+        GameManager.instacia.SumarPuntaje(Convert.ToInt32(puntaje * tiempoTranscurrido * 100));
         GameManager.instacia.CambiarEscena("Perder");
+
     }
 
     public void JuegoGanado()
